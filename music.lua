@@ -147,9 +147,9 @@ end
 function music.interval(interval)
     if interval == "U" then return 0 end -- Unisons!
 
-    local mod = interval:sub(0,1)
-    local baseint = tonumber(interval:sub(2))
-    assert(INTERVALMODS[mod] ~= nil and mod ~= "" and baseint ~= nil, "Invalid interval: "..interval)
+    local mod, baseint = interval:match("(%a)(%d*)")
+    baseint = tonumber(baseint)
+    assert(INTERVALMODS[mod] ~= nil and mod and baseint ~= nil, "Invalid interval: "..interval)
 
     local octave = 0
     while baseint > 7 do
