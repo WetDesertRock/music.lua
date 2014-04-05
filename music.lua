@@ -149,7 +149,7 @@ function music.interval(interval)
 
     local mod, baseint = interval:match("(%a)(%d*)")
     baseint = tonumber(baseint)
-    assert(INTERVALMODS[mod] ~= nil and mod and baseint ~= nil, "Invalid interval: "..interval)
+    assert(INTERVALMODS[mod] and baseint, "Invalid interval: "..interval)
 
     local octave = 0
     while baseint > 7 do
