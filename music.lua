@@ -136,14 +136,7 @@ function music.noteToInt(note)
 end
 
 function music.intToNote(note)
-    note = math.floor(note) -- Idiot proofing.
-    while note > 11 do
-        note = note - 12
-    end
-    while note < 0 do
-        note = note + 12
-    end
-
+    note = math.floor(note % 12) -- Idiot proofing.
     return NOTE_INTS[note+1]
 end
 
