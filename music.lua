@@ -136,36 +136,23 @@ function music.noteToInt(note)
 end
 
 function music.intToNote(note)
-    note = math.floor(note) -- Idiot proofing.
-    while note > 11 do
-        note = note - 12
-    end
-    while note < 0 do
-        note = note + 12
-    end
-
+    note = math.floor(note % 12) -- Idiot proofing.
     return NOTE_INTS[note+1]
 end
 
 function music.normalizeNoteName(note)
-    return(music.intAsNote(music.noteAsInt(note)))
+    return(music.intToNote(music.noteToInt(note)))
 end
 
 function music.interval(interval)
     if interval == "U" then return 0 end -- Unisons!
 
-    local mod = interval:sub(0,1)
-    local baseint = tonumber(interval:sub(2))
-    assert(INTERVALMODS[mod] ~= nil and mod ~= "" and baseint ~= nil, "Invalid interval: "..interval)
+    local mod, baseint = interval:match("(%a)(%d*)")
+    baseint = tonumber(baseint)
+    assert(INTERVALMODS[mod] and baseint, "Invalid interval: "..interval)
 
-    local octave = 0
-    while baseint > 7 do
-        baseint = baseint - 8
-        octave = octave+1
-    end
-    if baseint == 0 then
-        baseint = 1
-    end
+    local octave = math.floor(baseint / 8)
+    baseint = baseint == 0 and 1 or baseint % 8
 
     return INTERVALS[baseint]+INTERVALMODS[mod]+(12*octave)
 end
@@ -173,7 +160,7 @@ end
 function music.chord(note,chord)
     local root
     if type(note) == "string" then
-        root = music.noteAsInt(note)
+        root = music.noteToInt(note)
     else
         root = key
     end
@@ -195,7 +182,7 @@ end
 function music.scale(key,scale)
     local tonic
     if type(key) == "string" then
-        tonic = music.noteAsInt(key)
+        tonic = music.noteToInt(key)
     else
         tonic = key
     end
