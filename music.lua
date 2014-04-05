@@ -151,14 +151,8 @@ function music.interval(interval)
     baseint = tonumber(baseint)
     assert(INTERVALMODS[mod] and baseint, "Invalid interval: "..interval)
 
-    local octave = 0
-    while baseint > 7 do
-        baseint = baseint - 8
-        octave = octave+1
-    end
-    if baseint == 0 then
-        baseint = 1
-    end
+    local octave = math.floor(baseint / 8)
+    baseint = baseint == 0 and 1 or baseint % 8
 
     return INTERVALS[baseint]+INTERVALMODS[mod]+(12*octave)
 end
