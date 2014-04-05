@@ -97,7 +97,7 @@ local INTERVALMODS = {
     P = 0
 }
 
-function music.getPitchRatio(semitones)
+function music.pitchRatio(semitones)
     return(pitchmod^semitones)
 end
 
@@ -107,10 +107,10 @@ function music.midiToFrequency(mn,afreq)
         afreq = 440
     end
     local pchange = mn-69
-    return afreq*music.getPitchRatio(pchange)
+    return afreq*music.pitchRatio(pchange)
 end
 
-function music.noteAsInt(note)
+function music.noteToInt(note)
     local basenote = note:sub(0,1)
     local modifications = note:sub(2)
 
@@ -135,7 +135,7 @@ function music.noteAsInt(note)
     return(notenum)
 end
 
-function music.intAsNote(note)
+function music.intToNote(note)
     note = math.floor(note) -- Idiot proofing.
     while note > 11 do
         note = note - 12

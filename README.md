@@ -12,7 +12,7 @@ This music.lua can be dropped into a project, and required as thus:
 ###Transposing a frequency up a fifth.
 ```lua
     local freq = 634
-    print(freq * music.getPitchRatio(music.interval("P5")))
+    print(freq * music.pitchRatio(music.interval("P5")))
     -- 949.92668673982
 ```
 
@@ -41,11 +41,9 @@ This music.lua can be dropped into a project, and required as thus:
     -- G#,A#,B,C#,D#,E,F#
 ```
 
-###Getting the pitch for
-
 ##Function Reference
 
-###music.getPitchRatio(semitones)
+###music.pitchRatio(semitones)
 Returns a ratio that will modify a sound by `semitones`.
 
 ###music.midiToFrequency(midinote [, afreq])
