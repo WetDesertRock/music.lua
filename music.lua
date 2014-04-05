@@ -141,7 +141,7 @@ function music.intToNote(note)
 end
 
 function music.normalizeNoteName(note)
-    return(music.intAsNote(music.noteAsInt(note)))
+    return(music.intAsNote(music.noteToInt(note)))
 end
 
 function music.interval(interval)
@@ -160,7 +160,7 @@ end
 function music.chord(note,chord)
     local root
     if type(note) == "string" then
-        root = music.noteAsInt(note)
+        root = music.noteToInt(note)
     else
         root = key
     end
@@ -182,7 +182,7 @@ end
 function music.scale(key,scale)
     local tonic
     if type(key) == "string" then
-        tonic = music.noteAsInt(key)
+        tonic = music.noteToInt(key)
     else
         tonic = key
     end
