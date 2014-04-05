@@ -141,7 +141,7 @@ function music.intToNote(note)
 end
 
 function music.normalizeNoteName(note)
-    return(music.intAsNote(music.noteToInt(note)))
+    return(music.intToNote(music.noteToInt(note)))
 end
 
 function music.interval(interval)
