@@ -43,12 +43,24 @@ This music.lua can be dropped into a project, and required as thus:
 
 ##Function Reference
 
-###music.pitchRatio(semitones)
-Returns a ratio that will modify a sound by `semitones`.
+###music.pitchRatio(semitones,temperment)
+Returns a ratio that will modify a sound by `semitones` in equal temperment. If
+a different temperment is given then it is used instead. Avaliable temperments
+can be found in the table `music.temperments`.
 
-###music.midiToFrequency(midinote [, afreq])
-Returns the frequency value of a midi note. If `afreq` is given it is used as
-A4's pitch instead of the standard 440Hz.
+###music.midiToFrequency(midinote [, temperment [, bfreq [, bnote]]])
+Returns the frequency value of a midi note using `temperment` (defaults to
+equal). If `bfreq` (base frequency) is given it will use that as the frequency
+to base calculations on. If you want to use a different note to tune your inequal
+temperments, use `bnote` (midi note) to sepecify which frequency you are using.
+```lua
+    local D = math.floor(music.midiToFrequency(62))
+    print(music.midiToFrequency(69,"pythagorean"))
+    print(music.midiToFrequency(69,"pythagorean",D,62))
+    print(music.midiToFrequency(69,"equal"))
+    print(music.midiToFrequency(69,"equal",D,62))
+```
+
 
 ###music.noteToInt(notename)
 Given a valid `note` (as a string), returns an integer value describing the notes

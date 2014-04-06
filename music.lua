@@ -52,7 +52,9 @@ music.chords.mm7 = {"U","m3","P5","m7"}
 music.chords.dim7 = {"U","m3","d5","M6"} -- Hm, my method for getting intervals falls apart here.
 music.chords.hdim7 = {"U","m3","d5","m7"}
 
-local pitchmod = 2.0^(1/12)
+music.temperments = {"equal","pythagorean"}
+
+local EQUAL_PITCHMOD = 2.0^(1/12)
 
 local NOTES = {
     C = 0,
@@ -79,6 +81,21 @@ local NOTE_INTS = {
     'B'
 }
 
+local PYTHAG_RATIOS = { -- http://en.wikipedia.org/wiki/Pythagorean_tuning
+    1,
+    256/243,
+    9/8, -- M2
+    32/27,
+    81/64, -- M3
+    4/3, -- P4
+    729/512, -- A4
+    3/2, -- P5
+    128/81,
+    27/16, -- M6
+    16/9,
+    243/128, -- M7
+}
+
 local INTERVALS = {
     0, --Unison
     2, --M2
@@ -97,17 +114,28 @@ local INTERVALMODS = {
     P = 0
 }
 
-function music.pitchRatio(semitones)
-    return(pitchmod^semitones)
+function music.pitchRatio(semitones,temperment)
+    if temperment == "equal" or temperment == nil then
+        return(EQUAL_PITCHMOD^semitones)
+    elseif temperment == "pythagorean" then
+        local octave = 2^math.floor(semitones / 12)
+        semitones = semitones % 12
+        local ratio = PYTHAG_RATIOS[semitones+1]*octave
+        return(ratio)
+    end
 end
 
-function music.midiToFrequency(mn,afreq)
-    local a = 69
-    if afreq == nil then
-        afreq = 440
+function music.midiToFrequency(mn,temperment,bfreq,bnote)
+    if bnote == nil then
+        bnote = 69
+    -- else
+        -- bnote = bnote
     end
-    local pchange = mn-69
-    return afreq*music.pitchRatio(pchange)
+    if bfreq == nil then
+        bfreq = 440
+    end
+    local pchange = mn-bnote
+    return bfreq*music.pitchRatio(pchange,temperment)
 end
 
 function music.noteToInt(note)
