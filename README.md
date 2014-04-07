@@ -22,9 +22,9 @@ This music.lua can be dropped into a project, and required as thus:
     local BSharps = "B##"
     local FNatural = "F"
 
-    print(music.noteAsInt(CSharp) == music.noteAsInt(BSharps))
-    print(music.noteAsInt(CSharp) == music.noteAsInt(FNatural))
-    print(music.noteAsInt(BSharps) == music.noteAsInt(FNatural))
+    print(music.noteToInt(CSharp) == music.noteToInt(BSharps))
+    print(music.noteToInt(CSharp) == music.noteToInt(FNatural))
+    print(music.noteToInt(BSharps) == music.noteToInt(FNatural))
     -- true
     -- false
     -- false
@@ -35,7 +35,7 @@ This music.lua can be dropped into a project, and required as thus:
     local GSMinor = music.scale("G#",music.scales.harmonic)
     local outtable = {}
     for _,n in ipairs(GSMinor) do
-        table.insert(outtable,music.intAsNote(n))
+        table.insert(outtable,music.intToNote(n))
     end
     print(table.concat(outtable,","))
     -- G#,A#,B,C#,D#,E,F#
