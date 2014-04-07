@@ -130,4 +130,4 @@ Given a key and scale, returns a table of the pitches in a scale. Example:
 ##TODO
 * Fix intervals so you can have a dim 7. Perhaps just use a simple table look up?
   No fancy trickery?
-* Add in testing.
+* Add diatonic intervals.
