@@ -27,7 +27,7 @@
 -- changes/improvements my way so I can consider including them in this library.
 --
 
-music = {}
+local music = {}
 
 music.scales = {}
 music.scales.dorian =   {2,1,2,2,2,1}
