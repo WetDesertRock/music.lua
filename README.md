@@ -2,6 +2,10 @@
 
 A library to aid the use of musical concepts in lua projects.
 
+This library expects that you have some basis and understand of music theory. It
+is after all a library implementing music theory! If you need help, feel free to
+contact me.
+
 
 ##Installation
 This music.lua can be dropped into a project, and required as thus:
@@ -92,6 +96,12 @@ Gets a chord `chord` built off of `root`. Chord is a table with intervals inside
 Example:
 `d_minor_chord = music.chord("D",music.chords.minor) -- Result: {2, 5, 9}`
 
+###music.diatonicChord(root,scale [, ctype [, inversion]])
+Gets a diatonic chord built off of `root` in the specified scale (key). If
+`ctype` can be used to change what kind of chord you get. Avaliable options are
+"triad" and "7", for a triad and seventh chords. `inversion` is the inversion
+number of the chord, 0 is root position, 1 is the first inversion, 2 the second
+and so on.
 
 ###music.scale(key,scale)
 Given a key and scale, returns a table of the pitches in a scale. Example:
@@ -127,7 +137,9 @@ Given a key and scale, returns a table of the pitches in a scale. Example:
 `music.chords.dim7`  
 `music.chords.hdim7`  
 
+###Misc
+`music.temperments` - List of the avaliable temperments.
+
 ##TODO
 * Fix intervals so you can have a dim 7. Perhaps just use a simple table look up?
   No fancy trickery?
-* Add diatonic intervals.

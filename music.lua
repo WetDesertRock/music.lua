@@ -185,6 +185,43 @@ function music.interval(interval)
     return INTERVALS[baseint]+INTERVALMODS[mod]+(12*octave)
 end
 
+local function wrapIndex(i,t) -- Wraps a index t
+    return ((i-1)%#t)+1
+end
+
+local function invertChord(t,count)
+    while count > 0 do
+        local le = table.remove(t,#t)
+        table.insert(t,1,le-12)
+        count = count-1
+    end
+    return t
+end
+
+function music.diatonicChord(root,scale,ctype,inversion)
+    assert(root~=0,"Root must not be zero.")
+    if ctype == nil then ctype = "triad" end
+    if inversion == nil then inversion = 0 end
+    local chord = {}
+
+    local nexttone = root
+
+    table.insert(chord,scale[wrapIndex(nexttone,scale)]+(12*math.floor(nexttone / 8)))
+    nexttone = wrapIndex(nexttone + 2,scale)
+    table.insert(chord,scale[wrapIndex(nexttone,scale)]+(12*math.floor(nexttone / 8)))
+    nexttone = wrapIndex(nexttone + 2,scale)
+    table.insert(chord,scale[wrapIndex(nexttone,scale)]+(12*math.floor(nexttone / 8)))
+
+    if ctype == "7" then
+        nexttone = wrapIndex(nexttone + 2,scale)
+        table.insert(chord,scale[nexttone])
+    end
+
+    invertChord(chord,inversion)
+
+    return chord
+end
+
 function music.chord(note,chord)
     local root
     if type(note) == "string" then
