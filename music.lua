@@ -42,6 +42,8 @@ music.scales.minor = music.scales.aeolian
 music.scales.harmonicminor = {2,1,2,2,1,3}
 music.scales.melodicminor = {2,1,2,2,2,2}
 
+music.scales.wholetone = {2,2,2,2,2}
+
 music.chords = {}
 music.chords.major = {"U","M3","P5"}
 music.chords.minor = {"U","m3","P5"}

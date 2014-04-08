@@ -126,13 +126,16 @@ Given a key and scale, returns a table of the pitches in a scale. Example:
 `music.scales.harmonicminor`  
 `music.scales.melodicminor`  
 
-####Other modes
+####Modes
 `music.scales.dorian`  
 `music.scales.phrygian`  
 `music.scales.lydian`  
 `music.scales.mixolydian`  
 `music.scales.aeolian`  
 `music.scales.locrian`  
+
+####Other
+`music.scales.wholetone`  
 
 ###Chords
 `music.chords.major`  
