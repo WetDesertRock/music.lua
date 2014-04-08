@@ -97,11 +97,18 @@ Example:
 `d_minor_chord = music.chord("D",music.chords.minor) -- Result: {2, 5, 9}`
 
 ###music.diatonicChord(root,scale [, ctype [, inversion]])
-Gets a diatonic chord built off of `root` in the specified scale (key). If
+Gets a diatonic chord built off of `root` in the specified scale (key) Note that
+`root` is the position in the scale, so the fifth scale degree would be a 5. If
 `ctype` can be used to change what kind of chord you get. Avaliable options are
 "triad" and "7", for a triad and seventh chords. `inversion` is the inversion
 number of the chord, 0 is root position, 1 is the first inversion, 2 the second
 and so on.
+``` lua
+local scale = music.scale("D",music.scales.major)
+music.diatonicChord(5,scale,"7",3) -- Gets a V4-2 chord.
+
+```
+
 
 ###music.scale(key,scale)
 Given a key and scale, returns a table of the pitches in a scale. Example:

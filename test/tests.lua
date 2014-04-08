@@ -93,8 +93,8 @@ end
 tests["music.diatonicChord"] = function()
     local scale = music.scale(0,music.scales.major)
     testeq( music.diatonicChord(1,scale,"triad",0),    {0,4,7} )
-    testeq( music.diatonicChord(1,scale,"triad",1),    {-5,0,4} )
-    testeq( music.diatonicChord(1,scale,"triad",2),    {-8,-5,0} )
+    testeq( music.diatonicChord(1,scale,"triad",1),    {4,7,12} )
+    testeq( music.diatonicChord(1,scale,"triad",2),    {7,12,16} )
 end
 
 tester.dotests(tests)

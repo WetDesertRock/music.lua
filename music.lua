@@ -191,30 +191,33 @@ end
 
 local function invertChord(t,count)
     while count > 0 do
-        local le = table.remove(t,#t)
-        table.insert(t,1,le-12)
+        local le = table.remove(t,1)
+        table.insert(t,le+12)
         count = count-1
     end
     return t
 end
 
 function music.diatonicChord(root,scale,ctype,inversion)
-    assert(root~=0,"Root must not be zero.")
+    assert(root>0,"Root must not be less than one.")
     if ctype == nil then ctype = "triad" end
     if inversion == nil then inversion = 0 end
     local chord = {}
 
-    local nexttone = root
+    local ctemplate = {0,2,4}
+    if ctype == "7" then table.insert(ctemplate,6) end
 
-    table.insert(chord,scale[wrapIndex(nexttone,scale)]+(12*math.floor(nexttone / 8)))
-    nexttone = wrapIndex(nexttone + 2,scale)
-    table.insert(chord,scale[wrapIndex(nexttone,scale)]+(12*math.floor(nexttone / 8)))
-    nexttone = wrapIndex(nexttone + 2,scale)
-    table.insert(chord,scale[wrapIndex(nexttone,scale)]+(12*math.floor(nexttone / 8)))
+    local lasttone = -1
 
-    if ctype == "7" then
-        nexttone = wrapIndex(nexttone + 2,scale)
-        table.insert(chord,scale[nexttone])
+    root = wrapIndex(root,scale)
+    for _,mod in pairs(ctemplate) do
+        local nextnote = scale[wrapIndex(root+mod,scale)]
+
+        while nextnote < lasttone do
+            nextnote = nextnote + 12
+        end
+        table.insert(chord,nextnote)
+        lasttone = nextnote
     end
 
     invertChord(chord,inversion)
