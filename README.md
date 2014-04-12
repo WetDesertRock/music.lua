@@ -47,16 +47,16 @@ This music.lua can be dropped into a project, and required as thus:
 
 ##Function Reference
 
-###music.pitchRatio(semitones,temperment)
-Returns a ratio that will modify a sound by `semitones` in equal temperment. If
-a different temperment is given then it is used instead. Avaliable temperments
-can be found in the table `music.temperments`.
+###music.pitchRatio(semitones,temperament)
+Returns a ratio that will modify a sound by `semitones` in equal temperament. If
+a different temperament is given then it is used instead. Available temperaments
+can be found in the table `music.temperaments`.
 
-###music.midiToFrequency(midinote [, temperment [, bfreq [, bnote]]])
-Returns the frequency value of a midi note using `temperment` (defaults to
+###music.midiToFrequency(midinote [, temperament [, bfreq [, bnote]]])
+Returns the frequency value of a midi note using `temperament` (defaults to
 equal). If `bfreq` (base frequency) is given it will use that as the frequency
-to base calculations on. If you want to use a different note to tune your inequal
-temperments, use `bnote` (midi note) to sepecify which frequency you are using.
+to base calculations on. If you want to use a different note to tune your unequal
+temperament, use `bnote` (midi note) to specify which frequency you are using.
 ```lua
     local D = math.floor(music.midiToFrequency(62))
     print(music.midiToFrequency(69,"pythagorean"))
@@ -86,7 +86,7 @@ Given a note string, returns a sane version of the notestring.
 ```
 
 ###music.interval(interval)
-Gives the number of semi tones needed to aquire the specified `interval`. A
+Gives the number of semi tones needed to acquire the specified `interval`. A
 valid interval will always have a quality, and then a number specifying the
 interval. Valid qualities are `P` for perfect, `M` for major, `m` for minor, `d`
 for diminished, and `A for augmented.
@@ -99,7 +99,7 @@ Example:
 ###music.diatonicChord(root,scale [, ctype [, inversion]])
 Gets a diatonic chord built off of `root` in the specified scale (key) Note that
 `root` is the position in the scale, so the fifth scale degree would be a 5. If
-`ctype` can be used to change what kind of chord you get. Avaliable options are
+`ctype` can be used to change what kind of chord you get. Available options are
 "triad" and "7", for a triad and seventh chords. `inversion` is the inversion
 number of the chord, 0 is root position, 1 is the first inversion, 2 the second
 and so on.
@@ -148,7 +148,7 @@ Given a key and scale, returns a table of the pitches in a scale. Example:
 `music.chords.hdim7`  
 
 ###Misc
-`music.temperments` - List of the avaliable temperments.
+`music.temperaments` - List of the available temperament.
 
 ##TODO
 * Fix intervals so you can have a dim 7. Perhaps just use a simple table look up?

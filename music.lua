@@ -54,7 +54,7 @@ music.chords.mm7 = {"U","m3","P5","m7"}
 music.chords.dim7 = {"U","m3","d5","M6"} -- Hm, my method for getting intervals falls apart here.
 music.chords.hdim7 = {"U","m3","d5","m7"}
 
-music.temperments = {"equal","pythagorean"}
+music.temperaments = {"equal","pythagorean"}
 
 local EQUAL_PITCHMOD = 2.0^(1/12)
 
@@ -116,10 +116,10 @@ local INTERVALMODS = {
     P = 0
 }
 
-function music.pitchRatio(semitones,temperment)
-    if temperment == "equal" or temperment == nil then
+function music.pitchRatio(semitones,temperament)
+    if temperament == "equal" or temperament == nil then
         return(EQUAL_PITCHMOD^semitones)
-    elseif temperment == "pythagorean" then
+    elseif temperament == "pythagorean" then
         local octave = 2^math.floor(semitones / 12)
         semitones = semitones % 12
         local ratio = PYTHAG_RATIOS[semitones+1]*octave
@@ -127,7 +127,7 @@ function music.pitchRatio(semitones,temperment)
     end
 end
 
-function music.midiToFrequency(mn,temperment,bfreq,bnote)
+function music.midiToFrequency(mn,temperament,bfreq,bnote)
     if bnote == nil then
         bnote = 69
     -- else
@@ -137,7 +137,7 @@ function music.midiToFrequency(mn,temperment,bfreq,bnote)
         bfreq = 440
     end
     local pchange = mn-bnote
-    return bfreq*music.pitchRatio(pchange,temperment)
+    return bfreq*music.pitchRatio(pchange,temperament)
 end
 
 function music.noteToInt(note)
