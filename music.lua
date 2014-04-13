@@ -116,7 +116,17 @@ local INTERVALMODS = {
     P = 0
 }
 
+local function contains(t,val)
+    for _,v in pairs(t) do
+        if v == val then
+            return true
+        end
+    end
+    return false
+end
+
 function music.pitchRatio(semitones,temperament)
+    assert(contains(music.temperaments,temperament) or temperament == nil,"Incorrect temperament: "..temperament)
     if temperament == "equal" or temperament == nil then
         return(EQUAL_PITCHMOD^semitones)
     elseif temperament == "pythagorean" then
